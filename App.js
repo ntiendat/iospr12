@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import Categorys from "./components/CategoryListItem";
 import Register from "./components/Register";
+import Cont from "./components/Content";
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,12 +14,10 @@ import {
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import axios from "axios";
-
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -41,22 +40,6 @@ class Login extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-
-    // fetch('http://localhost:8000/api/user'
-    // // , {
-    // //   method: 'POST',
-    // //   headers: {
-    // //     Accept: 'application/json',
-    // //     'Content-Type': 'application/json'
-    // //   },
-    // //   body: JSON.stringify({
-    // //     firstParam: 'yourValue',
-    // //     secondParam: 'yourOtherValue'
-    // //   })
-    // // }
-    // )
-    // .then((response)=> console.log(response))
-    // .then((json)=> console.log(this.state.users));
   }
   login = () => {
     this.state.users.map((obj) => {
@@ -65,7 +48,7 @@ class Login extends React.Component {
         obj.pass === this.state.pass
       ) {
         console.log("đăng nhập nhành công");
-        this.props.navigation.replace("Home",{tk:obj.username});
+        this.props.navigation.replace("Home", { tk: obj.username });
       } else {
         console.log("đăng nhập thất bại");
       }
@@ -103,51 +86,57 @@ class Login extends React.Component {
           <Text style={styles.ButtonStyle}>Đăng nhập</Text>
         </TouchableOpacity>
         <View style={styles.flx}>
-        <TouchableOpacity onPress={this.register} style={{flex:1}}><Text style={{textAlign:'left'}}>Đăng ký</Text></TouchableOpacity>
-        <TouchableOpacity style={{flex:1}}><Text style={{textAlign:'right'}}>Lấy lại mật khẩu</Text></TouchableOpacity>
-      </View>
+          <TouchableOpacity onPress={this.register} style={{ flex: 1 }}>
+            <Text style={{ textAlign: "left" }}>Đăng ký</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ flex: 1 }}>
+            <Text style={{ textAlign: "right" }}>Lấy lại mật khẩu</Text>
+          </TouchableOpacity>
+        </View>
 
         <StatusBar></StatusBar>
       </View>
-      //   <SafeAreaView>
-      //   <TextInput   onChangeText={this.onChangeTK}   style={styles.input} value = {this.state.username} placeholder="Tài Khoản" />
-      //   <TextInput   onChangeText={this.onChangeMK}  style={styles.input} value = {this.state.pass} placeholder="Mật khẩu" />
-      //   <TouchableOpacity  style={styles.addButton}
-      //    onPress={this.login}>
-      //     <Text>
-      //       Đăng Nhập
-      //     </Text>
-      //   </TouchableOpacity>
-      // </SafeAreaView>
     );
   }
 }
 
 class Home extends React.Component {
   render() {
-    console.log(this.props.route.params.tk);
+    // console.log(this.props.route.params.tk);
     return (
-     
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={Registers} />
+        <Tab.Screen
+          name="Home"
+          component={Ct}
+          options={{ title: "VNEXPRESS" }}
+        />
         <Tab.Screen name="Settings" component={Login} />
       </Tab.Navigator>
-   
     );
   }
 }
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.route.params.id,
+    };
+  }
+
+  render() {
+    return <Cont id={this.state.id} />;
+  }
+}
 class Registers extends React.Component {
-  
   render() {
     return <Register prop={this.props} />;
   }
 }
 class Ct extends React.Component {
   render() {
-    return <Categorys/>;
+    return <Categorys prop={this.props} />;
   }
 }
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -155,17 +144,21 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{ title: "Đăng nhập" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: "Trang Home" , headerLeft: null }}
-          
+          options={{ title: "VNXpress", headerLeft: null }}
         />
         <Stack.Screen
           name="Registers"
-          component={Ct}
+          component={Registers}
+          options={{ title: "Register" }}
+        />
+        <Stack.Screen
+          name="Content"
+          component={Content}
           options={{ title: "Register" }}
         />
       </Stack.Navigator>
@@ -192,8 +185,8 @@ const styles = StyleSheet.create({
     marginLeft: 35,
   },
   flx: {
-    flexDirection: 'row',
-    width: '80%',
+    flexDirection: "row",
+    width: "80%",
     height: 20,
   },
   input: {

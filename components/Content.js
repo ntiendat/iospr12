@@ -1,7 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
-import Ski from "../assets/ski.png";
 import {
   StyleSheet,
   Text,
@@ -11,7 +10,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-export default class CategoryListItem extends React.Component {
+export default class Content extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,33 +25,29 @@ export default class CategoryListItem extends React.Component {
     })
       .then((res) => {
         this.setState({ bai_viet: res.data });
-        //  console.log(this.state.bai_viet);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
   render() {
     return (
       <ScrollView>
         {this.state.bai_viet.map((obj) => {
-          return (
-            <TouchableOpacity
-              key={obj.id.toString()}
-              onPress={() =>
-                this.props.prop.navigation.navigate("Content", { id: obj.id })
-              }
-            >
+          if (obj.id == this.props.id) {
+            console.log(obj.id);
+            return (
               <View style={({ flex: 1 }, styles.container)}>
                 <StatusBar style="auto" />
 
                 <Text style={styles.title}>{obj.tieu_de}</Text>
                 <Image style={styles.catrgoryImage} source={{ uri: obj.anh }} />
-                <Text >{ obj.noi_dung.slice(0, 150)+'...'}</Text>
+                <Text>{obj.noi_dung}</Text>
               </View>
-            </TouchableOpacity>
-          );
+            );
+          } else {
+            return true;
+          }
         })}
       </ScrollView>
     );
