@@ -40,6 +40,7 @@ class Login extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+
   }
   login = () => {
     this.state.users.map((obj) => {
@@ -96,6 +97,7 @@ class Login extends React.Component {
 
         <StatusBar></StatusBar>
       </View>
+
     );
   }
 }
@@ -105,11 +107,7 @@ class Home extends React.Component {
     // console.log(this.props.route.params.tk);
     return (
       <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={Ct}
-          options={{ title: "VNEXPRESS" }}
-        />
+        <Tab.Screen name="Home" component={Ct} options={{ title: 'VNEXPRESS' }} />
         <Tab.Screen name="Settings" component={Login} />
       </Tab.Navigator>
     );
@@ -119,12 +117,14 @@ class Content extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.route.params.id,
+      id:this.props.route.params.id,
     };
   }
 
+  
+  
   render() {
-    return <Cont id={this.state.id} />;
+    return <Cont id={this.state.id}/>;
   }
 }
 class Registers extends React.Component {
@@ -139,17 +139,17 @@ class Ct extends React.Component {
 }
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <Stack.Navigator>
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: "VNXpress", headerLeft: null }}
+          options={{ title:'VNXpress', headerLeft: null }}
         />
         <Stack.Screen
           name="Registers"
@@ -159,7 +159,8 @@ export default function App() {
         <Stack.Screen
           name="Content"
           component={Content}
-          options={{ title: "Register" }}
+          options={{headerShown: false}}
+
         />
       </Stack.Navigator>
     </NavigationContainer>
