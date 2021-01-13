@@ -1,7 +1,11 @@
-import React from "react";
+import React , { Component } from "react";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
-import Ski from "../assets/ski.png";
+
+import { IP } from "../env";
+import { Container, Header, Tab, Tabs, ScrollableTab } from 'native-base';
+import TheGioi from './category/TheGioi';
+
 import {
   StyleSheet,
   Text,
@@ -10,6 +14,8 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  FlatList,
+  List
 } from "react-native";
 export default class CategoryListItem extends React.Component {
   constructor(props) {
@@ -18,10 +24,11 @@ export default class CategoryListItem extends React.Component {
       bai_viet: [],
     };
   }
+
   componentDidMount() {
     axios({
       method: "GET",
-      url: "http://192.168.1.26/api/public/api/baiviet",
+      url: "http://" + IP + "/api/public/api/baiviet",
       data: null,
     })
       .then((res) => {
@@ -35,26 +42,26 @@ export default class CategoryListItem extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        {this.state.bai_viet.map((obj) => {
-          return (
-            <TouchableOpacity
-              key={obj.id.toString()}
-              onPress={() =>
-                this.props.prop.navigation.navigate("Content", { id: obj.id })
-              }
-            >
-              <View style={({ flex: 1 }, styles.container)}>
-                <StatusBar style="auto" />
-
-                <Text style={styles.title}>{obj.tieu_de}</Text>
-                <Image style={styles.catrgoryImage} source={{ uri: obj.anh }} />
-                <Text >{ obj.noi_dung.slice(0, 150)+'...'}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+      <Container>
+        {/* <Header hasTabs/> */}
+        <Tabs renderTabBar={()=> <ScrollableTab />}>
+          <Tab heading="Trang nhất" >
+          <TheGioi prop={this.props.prop}/> 
+          </Tab>
+          <Tab heading="Mới nhất">
+          <TheGioi/> 
+          </Tab>
+          <Tab heading="Thời sự">
+          <TheGioi/> 
+          </Tab>
+          <Tab heading="Góc nhìn">
+          <TheGioi/> 
+          </Tab>
+          <Tab heading="Thế Giới">
+           <TheGioi/> 
+          </Tab>
+        </Tabs>
+      </Container>
     );
   }
 }

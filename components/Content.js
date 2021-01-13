@@ -10,6 +10,9 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
+import {IP} from '../env';
+
+
 export default class Content extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ export default class Content extends React.Component {
   componentDidMount() {
     axios({
       method: "GET",
-      url: "http://192.168.1.26/api/public/api/baiviet",
+      url: "http://"+IP+"/api/public/api/baiviet",
       data: null,
     })
       .then((res) => {
@@ -37,7 +40,7 @@ export default class Content extends React.Component {
           if (obj.id == this.props.id) {
             console.log(obj.id);
             return (
-              <View style={({ flex: 1 }, styles.container)}>
+              <View style={({ flex: 1 }, styles.container)}   key={obj.id.toString()}>
                 <StatusBar style="auto" />
 
                 <Text style={styles.title}>{obj.tieu_de}</Text>

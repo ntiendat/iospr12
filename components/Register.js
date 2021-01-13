@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
+import {IP} from './../env';
 
 class Register extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Register extends React.Component {
   register = () => {
     axios({
       method: "POST",
-      url: "http://192.168.1.26/api/public/api/register",
+      url: "http://"+IP+"/api/public/api/register",
       data: {
         username: this.state.username,
         pass: this.state.pass,
