@@ -49,16 +49,16 @@ export default class CategoryListItem extends React.Component {
           <TheGioi prop={this.props.prop}/> 
           </Tab>
           <Tab heading="Mới nhất">
-          <TheGioi/> 
+          <TheGioi prop={this.props.prop}/> 
           </Tab>
           <Tab heading="Thời sự">
-          <TheGioi/> 
+          <TheGioi prop={this.props.prop}/> 
           </Tab>
           <Tab heading="Góc nhìn">
-          <TheGioi/> 
+          <TheGioi prop={this.props.prop}/> 
           </Tab>
           <Tab heading="Thế Giới">
-           <TheGioi/> 
+          <TheGioi prop={this.props.prop}/> 
           </Tab>
         </Tabs>
       </Container>

@@ -92,9 +92,10 @@ _get = async () =>{
 
     return (
       <View>
+      
+        <ScrollView>
         <Text style={{ fontSize : 20,paddingTop:20,paddingLeft:20}} >Hell0 {username},</Text>
         <Text style={{ fontSize : 20,paddingLeft:20,paddingBottom:20}} >Tin bạn chưa xem</Text>
-        <ScrollView>
         <FlatList
           data={this.state.bai_viet}
           renderItem={({ item }) => (

@@ -43,7 +43,7 @@ _retrieveData = async (name, obj) => {
 _storeData = async (obj) => {
   try {
     await AsyncStorage.setItem("@USER:key", JSON.stringify(obj));
-    console.log('set');
+    console.log("set");
   } catch (error) {
     // Error saving data
   }
@@ -151,11 +151,9 @@ class Home extends React.Component {
                 : "ios-information-circle-outline";
             } else if (route.name === "MyContent") {
               iconName = focused ? "ios-list-box" : "ios-list";
-            }
-            else if (route.name === "Profile") {
+            } else if (route.name === "Profile") {
               iconName = focused ? "ios-list-box" : "ios-list";
             }
-            
 
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -171,47 +169,25 @@ class Home extends React.Component {
           component={Ct}
           options={{ title: "VNEXPRESS" }}
         />
-        <Tab.Screen name="MyContent" component={MyContent} options={{ title:"Tin của bạn"}} />
-        <Tab.Screen name="Profile" component={Info} options={{ title:"Info"}} />
+        <Tab.Screen
+          name="MyContent"
+          component={MyContent}
+          options={{ title: "Tin của bạn" }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Info}
+          options={{ title: "Info" }}
+        />
       </Tab.Navigator>
     );
   }
 }
 class Info extends React.Component {
   render() {
-    return <View/>;
+    return <View />;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class Content extends React.Component {
   constructor(props) {
@@ -226,15 +202,11 @@ class Content extends React.Component {
   }
 }
 
-
 class Registers extends React.Component {
   render() {
     return <Register prop={this.props} />;
   }
 }
-
-
-
 
 class Ct extends React.Component {
   render() {
@@ -242,15 +214,8 @@ class Ct extends React.Component {
   }
 }
 class MyContent extends React.Component {
-
- 
-
   render() {
-    return (
-     
-        <MyCont prop={this.props} />
-      
-    );
+    return <MyCont prop={this.props} />;
   }
 }
 export default function App() {
